@@ -2,16 +2,36 @@ state("gof_f")
 {
     string20 map : 0x530020;
     bool isLoading: 0x51F368;
+    byte isCutscene: 0x0038ADA0, 0x3C4;
+    byte health: 0x38ADD0, 0x4, 0x8C, 0x24, 0x18, 0x4, 0x34, 0x78;
+}
+
+init
+{
+	vars.Voldie = 0;
+}
+
+update
+{
+	if (current.map == "lvl_012_Voldemort")
+	{
+		if (old.map != "lvl_012_Voldemort")
+			{vars.Voldie = 0;}
+		else if (old.isCutscene != current.isCutscene)
+			{vars.Voldie++;}
+		else if (old.health != 0 && current.health == 0)
+			{vars.Voldie = 4;}
+	}
 }
 
 split
 {
-    return (old.map != "FrontEnd_EndOfLevel" && current.map == "FrontEnd_EndOfLevel");
+    return ((old.map != "FrontEnd_EndOfLevel" && current.map == "FrontEnd_EndOfLevel") || (vars.Voldie == 15 && old.isCutscene != current.isCutscene));
 }
 
 start 
 {
-    return (old.map == "FrontEnd_CharacterSe" && current.map == "lvl_001_CampsiteWood");
+    return old.map == "FrontEnd_CharacterSe" && current.map == "lvl_001_CampsiteWood";
 }
 
 isLoading
