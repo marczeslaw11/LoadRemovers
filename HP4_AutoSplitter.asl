@@ -11,6 +11,13 @@ init
 	vars.Voldie = 0;
 }
 
+startup
+{
+	settings.Add("leave-map", true, "Split when leaving the map");
+	settings.Add("final-split", true, "Split when beating the Voldemort");
+}
+
+
 update
 {
 	if (current.map == "lvl_012_Voldemort")
@@ -26,12 +33,13 @@ update
 
 split
 {
-    return ((old.map != "FrontEnd_EndOfLevel" && current.map == "FrontEnd_EndOfLevel") || (vars.Voldie == 15 && old.isCutscene != current.isCutscene));
+    return ((old.map != "FrontEnd_EndOfLevel" && current.map == "FrontEnd_EndOfLevel" && settings["leave-map"]) || 
+    	(vars.Voldie == 15 && (old.isCutscene != current.isCutscene) && settings["final-split"]));
 }
 
 start 
 {
-    return old.map == "FrontEnd_CharacterSe" && current.map == "lvl_001_CampsiteWood";
+    return (old.map == "FrontEnd_CharacterSe" && current.map == "lvl_001_CampsiteWood");
 }
 
 isLoading
