@@ -27,14 +27,14 @@ update
 		else if (old.isCutscene != current.isCutscene)
 			{vars.Voldie++;}
 		else if (old.health != 0 && current.health == 0)
-			{vars.Voldie = 4;}
+			{vars.Voldie = 3;}
 	}
 }
 
 split
 {
     return ((old.map != "FrontEnd_EndOfLevel" && current.map == "FrontEnd_EndOfLevel" && settings["leave-map"]) || 
-    	(vars.Voldie == 15 && (old.isCutscene != current.isCutscene) && settings["final-split"]));
+    	(vars.Voldie == 14 && (old.isCutscene != current.isCutscene) && settings["final-split"]));
 }
 
 start 
