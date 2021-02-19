@@ -14,7 +14,7 @@ init
 startup
 {
 	settings.Add("leave-map", true, "Split when leaving the map");
-	settings.Add("final-split", true, "Split when beating the Voldemort");
+	settings.Add("final-split", true, "Split when beating the Voldemort (let marczeslaw know if there're issues)");
 }
 
 
@@ -24,17 +24,17 @@ update
 	{
 		if (old.map != "lvl_012_Voldemort")
 			{vars.Voldie = 0;}
-		else if (old.isCutscene != current.isCutscene)
+		if (old.isCutscene != current.isCutscene)
 			{vars.Voldie++;}
 		else if (old.health != 0 && current.health == 0)
-			{vars.Voldie = 3;}
+			{vars.Voldie = 4;}
 	}
 }
 
 split
 {
     return ((old.map != "FrontEnd_EndOfLevel" && current.map == "FrontEnd_EndOfLevel" && settings["leave-map"]) || 
-    	(vars.Voldie == 14 && (old.isCutscene != current.isCutscene) && settings["final-split"]));
+    	(vars.Voldie == 15 && (old.isCutscene != current.isCutscene) && settings["final-split"]));
 }
 
 start 
