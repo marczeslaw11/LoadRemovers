@@ -1,4 +1,4 @@
-// HP5 autosplitter ver. 1.1 by Marczeslaw
+// HP5 autosplitter ver. 1.2 by Marczeslaw
 // Works only with dedicated splits
 // Check ReadMe.txt for instruction how to use and customise
 
@@ -11,8 +11,9 @@ state("hp")
 startup
 {
 	settings.Add("autostart", true, "Autostart on first cutscene");
-	settings.Add("splits", false, "Use dedicated splits file (click on Website to download the file)");
+	settings.Add("splits", false, "Use dedicated Any& splits file (uploaded to Resources)");
 	settings.Add("final", true, "Split on cutscene after defeating Voldemort");
+	settings.SetToolTip("splits", "https://www.speedrun.com/hp5/resources");
 }
 
 start 
@@ -80,22 +81,22 @@ split
 		 {
 		 	return (
 			// by Metallicafan212: just for a bit better efficiency, only check curr cutscene vs last once 
-			(current.cutscene != old.cutscene 	&& (	current.cutscene == "GP01.vp6" 					||	// leaving Dudley
-														current.cutscene == "GP04.vp6" 					||	// leaving Grimmauld Place
-														current.cutscene == "dh02_cs01_go_to_dada.vp6" 	||	// enter DADA lesson
-														current.cutscene == "DH03.vp6"	 				||	// detention
-														current.cutscene == "DH04.vp6" 					||	// talking with Sirius
-														current.cutscene == "rr01.vp6" 					||	// finding RoR
-														current.cutscene == "LW_LOADGAME.vp6" 			||	// savewarp, laoding game
-														current.cutscene == "RR26.vp6" 					||	// kissing with Cho
-														current.cutscene == "oc01_cs01.vp6" 			||	// Dumbledore's office
-														current.cutscene == "OC01.vp6" 					||	// finishing first oclumency
-														current.cutscene == "GP05.vp6" 					||	// leaving grimmauld place
-														current.cutscene == "DL03.vp6" 					||	// after losing duel in RoR
-														current.cutscene == "UH11.vp6" 					||	// going to forest with Umbridge
-														current.cutscene == "UH13.vp6" 					||	// leaving Hogwarts
-														current.cutscene == "mom_02_cs02_shotc.vp6" 	||	// Sirius dies
-														current.cutscene == "MOM4.vp6"))				||	// winning oclumency with Voldie																								
+			(current.cutscene != old.cutscene 	&& (current.cutscene == "GP01.vp6" 					||	// leaving Dudley
+													current.cutscene == "GP04.vp6" 					||	// leaving Grimmauld Place
+													current.cutscene == "dh02_cs01_go_to_dada.vp6" 	||	// enter DADA lesson
+													current.cutscene == "DH03.vp6"	 				||	// detention
+													current.cutscene == "DH04.vp6" 					||	// talking with Sirius
+													current.cutscene == "rr01.vp6" 					||	// finding RoR
+													current.cutscene == "LW_LOADGAME.vp6" 			||	// savewarp, laoding game
+													current.cutscene == "RR26.vp6" 					||	// kissing with Cho
+													current.cutscene == "oc01_cs01.vp6" 			||	// Dumbledore's office
+													current.cutscene == "OC01.vp6" 					||	// finishing first oclumency
+													current.cutscene == "GP05.vp6" 					||	// leaving grimmauld place
+													current.cutscene == "DL03.vp6" 					||	// after losing duel in RoR
+													current.cutscene == "UH11.vp6" 					||	// going to forest with Umbridge
+													current.cutscene == "UH13.vp6" 					||	// leaving Hogwarts
+													current.cutscene == "mom_02_cs02_shotc.vp6" 	||	// Sirius dies
+													current.cutscene == "MOM4.vp6"))				||	// winning oclumency with Voldie																								
 			(old.map == 3  && current.map == 4  && vars.gamestate == 10)  || 	// from Ginny to Hermione
 			(old.map == 4  && current.map == 2  && vars.gamestate == 10)  || 	// from Hermione to Ron
 			(old.map == 42 && current.map == 30 && vars.gamestate == 40)  ||	// from GS to 2nd floor corridor
