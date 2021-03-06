@@ -8,19 +8,19 @@ state("Game")
 startup
 {
 	var splitSettings = new Dictionary<string, string> {
-		{    "avalancherun.unr", "Glacier level" },
-		{     "aspenforest.unr", "First forest" },
-		{     "asp_combat1.unr", "Hunter duel in first forest" },
-		{          "icerun.unr", "Slide race" },
-		{    "valleyoffire.unr", "Lava land" },
-		{     "vof_combat1.unr", "First hunter duel in lava land" },
-		{     "vof_combat2.unr", "Second hunter duel in lava land" },
-		{    "salmonforest.unr", "Second forest" },
-		{     "sal_combat1.unr", "First hunter duel in second forest" },
-		{     "sal_combat2.unr", "Second hunter duel in second forest" },
-		{      "salmon_run.unr", "Salmon Run" },
-		{    "final_battle.unr", "Final duel with hunter" },
-		{ "secrettotemcave.unr", "Secret totem cave" }
+		{    "avalancherun", "Glacier level" },
+		{     "aspenforest", "First forest" },
+		{     "asp_combat1", "Hunter duel in first forest" },
+		{          "icerun", "Slide race" },
+		{    "valleyoffire", "Lava land" },
+		{     "vof_combat1", "First hunter duel in lava land" },
+		{     "vof_combat2", "Second hunter duel in lava land" },
+		{    "salmonforest", "Second forest" },
+		{     "sal_combat1", "First hunter duel in second forest" },
+		{     "sal_combat2", "Second hunter duel in second forest" },
+		{      "salmon_run", "Salmon Run" },
+		{    "final_battle", "Final duel with hunter" },
+		{ "secrettotemcave", "Secret totem cave" }
 	};
 	
 	settings.Add("levels", true, "Split entering these maps:");
@@ -34,9 +34,11 @@ start
 	return current.map == "CavePainting1.unr" && current.isCSskip == 1;
 }
 
-split
-{
-	return old.map != current.map && settings[current.map.ToLower()];
+split {
+    if (old.map != current.map) {
+        string mapNameClean = current.map.Split('.')[0];
+        return settings[mapNameClean];
+    }
 }
 
 isLoading
