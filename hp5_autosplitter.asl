@@ -10,15 +10,17 @@ state("hp")
 
 startup
 {
-	settings.Add("autostart", true, "Autostart on first cutscene");
-	settings.Add("splits", false, "Use dedicated Any& splits file (uploaded to Resources)");
+	settings.Add("autostart", true, "Autostart on first cutscene (full game run)");
+	settings.Add("autostartCE", false, "Autostart after first cutscene (Category Extentions)");
+	settings.Add("splits", false, "Use dedicated Any% splits file (uploaded to Resources)");
 	settings.Add("final", true, "Split on cutscene after defeating Voldemort");
 	settings.SetToolTip("splits", "https://www.speedrun.com/hp5/resources");
 }
 
 start 
 {
-	return (current.cutscene != old.cutscene && current.cutscene == "LW_NEWGAME.vp6" && settings["autostart"]);
+	return current.cutscene != old.cutscene && ((current.cutscene == "LW_NEWGAME.vp6" && settings["autostart"]) ||
+						    ((old.cutscene == "LW_LOADGAME.vp6" || old.cutscene == "GP04.vp6") && settings["autostartCE"]));
 }
 
 init
