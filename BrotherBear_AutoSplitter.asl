@@ -2,13 +2,12 @@ state("Game")
 {
 	bool isLoading : "Engine.dll", 0xF884, 0x1C8;
 	string50 map   : "Engine.dll", 0x001E7EB8, 0x28, 0xA0, 0x0;
-	byte isCSskip  : "Engine.dll", 0x1D9308, 0x5C;
+	//byte isCSskip  : "Engine.dll", 0x1D9308, 0x5C;
 }
 
 startup
 {
 	var splitSettings = new Dictionary<string, string> {
-		{    "avalancherun", "Glacier level" },
 		{     "aspenforest", "First forest" },
 		{     "asp_combat1", "Hunter duel in first forest" },
 		{          "icerun", "Slide race" },
@@ -19,8 +18,7 @@ startup
 		{     "sal_combat1", "First hunter duel in second forest" },
 		{     "sal_combat2", "Second hunter duel in second forest" },
 		{      "salmon_run", "Salmon Run" },
-		{    "final_battle", "Final duel with hunter" },
-		{ "secrettotemcave", "Secret totem cave" }
+		{    "final_battle", "Final duel with hunter" }
 	};
 	
 	settings.Add("levels", true, "Split entering these maps:");
@@ -31,7 +29,7 @@ startup
 
 start
 {
-	return current.map == "CavePainting1.unr" && current.isCSskip == 1;
+	return old.map == "CavePainting1.unr" && current.map != "CavePainting1.unr";
 }
 
 split 
