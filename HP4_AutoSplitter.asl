@@ -9,6 +9,7 @@ state("gof_f")
 init
 {
 	vars.Voldie = 0;
+	vars.gameRunning = true;
 }
 
 startup
@@ -44,10 +45,10 @@ start
 
 isLoading
 {
-    return current.isLoading;
+    return current.isLoading && vars.gameRunning;
 }
 
 exit
 {
-    timer.IsGameTimePaused = false;
+    vars.gameRunning = false;
 }
