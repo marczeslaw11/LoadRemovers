@@ -43,10 +43,10 @@ start
     return (old.map == "FrontEnd_CharacterSe" && current.map == "lvl_001_CampsiteWood");
 }
 
-isLoading
-{
-    return current.isLoading && vars.gameRunning;
-}
+//isLoading
+//{
+//    return current.isLoading && vars.gameRunning;
+//}
 
 exit
 {
