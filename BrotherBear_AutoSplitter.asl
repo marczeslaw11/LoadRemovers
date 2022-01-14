@@ -2,6 +2,7 @@ state("Game")
 {
 	bool isLoading : "Engine.dll", 0xF884, 0x1C8;
 	string50 map   : "Engine.dll", 0x001E7EB8, 0x28, 0xA0, 0x0;
+	bool inLauncher: "Window.dll", 0x49214;
 	//byte isCSskip  : "Engine.dll", 0x1D9308, 0x5C;
 }
 
@@ -42,5 +43,10 @@ split
 
 isLoading
 {
-	return current.isLoading;
+	return current.isLoading && !current.inLauncher;
+}
+
+exit
+{
+    timer.IsGameTimePaused = false;
 }
