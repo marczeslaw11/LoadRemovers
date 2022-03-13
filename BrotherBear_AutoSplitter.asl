@@ -23,6 +23,7 @@ startup
 	};
 	
 	settings.Add("levels", true, "Split entering these maps:");
+	settings.Add("loading", true, "Split loading the save from launcher");
 	
 	foreach (var setting in splitSettings)
 		settings.Add(setting.Key, true, setting.Value, "levels");
@@ -38,6 +39,10 @@ split
     if (old.map != current.map) 
     {
         return settings[current.map.Split('.')[0].ToLower()];
+    }
+    else if (old.inLauncher && !current.inLauncher)
+    {
+    	return settings["loading"];
     }
 }
 
