@@ -6,6 +6,7 @@ state("Bionicle")
 	bool inMenu1 : "Bionicle.exe", 0x24E0E0;	// 1 when paused and in menu, 0 in loading screen
 	bool inMenu2 : "Bionicle.exe", 0x24E0E8;	// 1 when paused and in menu, 1 in loading screen
 	string32 cutscene : "Bionicle.exe", 0x030D6324, 0x540;		// path to played audio file
+	bool heroMode: "Bionicle.exe", 0x2506F8;	// 1 when in Hero Mode
 }
 
 startup
@@ -58,6 +59,7 @@ startup
 		settings.Add(setting.Key.ToString() + "l", true, "Leave", setting.Key.ToString());					// check if leaving
 	}
 	settings.Add("finalCS", true, "Vezon defeated", "29");	// final cutscene
+	settings.Add("Hero", false, "Split whenever you complete a GC");
 }
 
 start
@@ -72,6 +74,10 @@ split
 		return settings[current.Level.ToString() + "e"] || settings[old.Level.ToString() + "l"];
 	}
 	else if (old.cutscene != current.cutscene && current.cutscene == @"bigbad\bb_level_outro_alt.wgt" && settings["finalCS"])
+	{
+		return true;
+	}
+	else if (old.heroMode && !current.heroMode)
 	{
 		return true;
 	}
