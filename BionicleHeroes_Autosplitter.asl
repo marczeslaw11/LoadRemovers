@@ -77,7 +77,7 @@ split
 	{
 		return true;
 	}
-	else if (old.heroMode && !current.heroMode)
+	else if (settings["Hero"] && old.heroMode && !current.heroMode)
 	{
 		return true;
 	}
