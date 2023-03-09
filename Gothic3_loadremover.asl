@@ -1,0 +1,10 @@
+state("Gothic3")
+{
+	int Loading : 0x0002638C, 0xF0, 0x8, 0x20, 0x4, 0xE68;
+	int Saving	: 0x00010720, 0x34, 0x38, 0x574;
+}
+
+isLoading
+{
+	return (current.Loading!=0 || current.Saving!=0);
+}
