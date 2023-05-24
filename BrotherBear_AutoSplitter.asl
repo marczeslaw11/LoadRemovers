@@ -38,15 +38,21 @@ start
 
 split 
 {
+    if (!string.IsNullOrWhiteSpace(current.map))
+    {
+        old.map = old.map.Split('.')[0].ToLower();
+        current.map = current.map.Split('.')[0].ToLower();
+    }
+    
     if (old.map != current.map) 
     {
-        return settings[current.map.Split('.')[0].ToLower()];
+        return settings[current.map];
     }
     else if (old.inLauncher && !current.inLauncher)
     {
     	return settings["loading"];
     }
-    else if (current.map == "Final_Battle.unr" && !old.FBDefeated && current.FBDefeated)
+    else if (current.map == "final_battle" && !old.FBDefeated && current.FBDefeated)
     {
     	return settings["end"];
     }
